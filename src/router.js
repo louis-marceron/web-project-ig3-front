@@ -1,46 +1,45 @@
-import notFound from "./views/notFound.js";
-
 class Router {
     constructor(routes) {
-        this.routes = routes;
-        this._loadInitialRoute();
+        this.notFound = routes.notFound
+        this.routes = routes.routes
+        this.loadRoute(window.location.pathname)
     }
 
-    async loadRoute(...urlSegs) {
-        const matchedRoute = this._matchUrlToRoute(urlSegs);
-
-        if (!matchedRoute) {
-            const main = document.querySelector('main');
-            console.log('No matched route');
-            main.innerHTML = await notFound.render();
-            return;
-        }
-
-        console.log(`matchedRoute: ${matchedRoute}`);
-        const url = `/${urlSegs.join('/')}`;
-        console.log(`url: ${url}`);
-        history.pushState({}, 'this works', url);
-        const main = document.querySelector('main');
-        main.innerHTML = await matchedRoute.template.render();
-    }
-
-    _matchUrlToRoute(urlSegs) {
-        const matchedRoute = this.routes.find(route => {
-            const routePathSegs = route.path.split('/').slice(1);
-            if (routePathSegs.length !== urlSegs.length) {
-                return false;
-            }
-            return routePathSegs.every((routePathSeg, i) => routePathSeg === urlSegs[i]);
-        });
-        return matchedRoute;
-    }
-
-    _loadInitialRoute() {
-        // Split the path name from the URL into an array of segments
-        const pathnameSplit = window.location.pathname.split('/');
-        const pathSegs = pathnameSplit.length > 1 ? pathnameSplit.slice(1) : [''];
-        this.loadRoute(...pathSegs);
+    async loadRoute(pathName) {
+        const main = document.querySelector('main')
+        const view = this.routes[pathName]
+        // history.pushState({}, '', pathName)
+        main.innerHTML = await view.render()
     }
 }
 
-export default Router;
+/**
+ * This function change the behavior of links with class `.internal-link`
+ * to use a router.
+ * @param {Router} router
+ * @returns {void}
+ */
+const handleInternalLinks = (router) => {
+    const body = document.querySelector('body')
+
+    body.addEventListener('click', function (event) {
+        if (event.target.classList.contains('internal-link')) {
+            // Prevent default link click behavior
+            event.preventDefault()
+            // Change the URL to the href attribute of our link
+            window.history.pushState({}, "", event.target.href)
+            console.log('Internal link clicked')
+            // Load the page using the new URL
+            router.loadRoute(event.target.pathname)
+        }
+    })
+
+    window.onpopstate = handleLocation;
+
+    function handleLocation() {
+        const path = window.location.pathname
+        router.loadRoute(path)
+    }
+}
+
+export { Router, handleInternalLinks }

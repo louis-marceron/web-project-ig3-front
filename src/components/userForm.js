@@ -4,6 +4,7 @@ export default {
         <form id="user-form">
           <!-- Form fields go here -->
         </form>
+        <p>hahahahahah</p>
       `;
     },
 };
