@@ -1,3 +1,5 @@
+import notFound from "./views/notFound.js";
+
 class Router {
     constructor(routes) {
         this.routes = routes;
@@ -8,15 +10,16 @@ class Router {
         const matchedRoute = this._matchUrlToRoute(urlSegs);
 
         if (!matchedRoute) {
+            const main = document.querySelector('main');
             console.log('No matched route');
+            main.innerHTML = await notFound.render();
             return;
         }
 
         console.log(`matchedRoute: ${matchedRoute}`);
         const url = `/${urlSegs.join('/')}`;
         console.log(`url: ${url}`);
-        // history.pushState({}, 'this works', url);
-        history.pushState({}, '', "hahahahahha");
+        history.pushState({}, 'this works', url);
         const main = document.querySelector('main');
         main.innerHTML = await matchedRoute.template.render();
     }

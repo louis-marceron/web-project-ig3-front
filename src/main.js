@@ -4,7 +4,7 @@ import userManagementView from './views/userManagement.js';
 import headerComponent from './components/header.js';
 
 // Render header
-document.getElementById('main-header').innerHTML = await headerComponent.render();
+document.querySelector('header').innerHTML = await headerComponent.render();
 
 const routes = [
     { path: '/', template: homeView.render() },
