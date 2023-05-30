@@ -1,8 +1,8 @@
 import { login } from '../services/apiService.js';
 import getCookie from '../utils/getCookie.js';
 
-// const API_URL = 'http://ecodiet.cluster-ig3.igpolytech.fr';
-const API_URL = 'http://localhost:3000'
+const API_URL = 'http://ecodiet.cluster-ig3.igpolytech.fr';
+// const API_URL = 'http://localhost:3000'
 
 export default {
     render: async () => {
