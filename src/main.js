@@ -10,7 +10,7 @@ import registerView from "./views/register.js"
 import accountSettingsView from "./views/accountSettings.js"
 import statsView from "./views/stats.js"
 
-const isLoggedIn = getCookie('loggedIn')
+const isLoggedIn = getCookie('loggedIn') == 'true'
 
 let routerOptions
 

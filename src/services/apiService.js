@@ -10,7 +10,7 @@ export async function getAllMeals() {
   const response = await fetch(`${API_URL}/meals`);
   return await response.json();
 }
- 
+
 export async function login(email, password) {
   const response = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
@@ -46,3 +46,38 @@ export async function consumeMeal(mealId, userId) {
   });
   return await response.json();
 }
+
+export async function getMealConsumptions(userId) {
+  const response = await fetch(`${API_URL}/users/${userId}/meal-consumptions`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include'
+  });
+  return await response.json();
+}
+
+export async function deleteAccount(userId) {
+  const response = await fetch(`${API_URL}/users/${userId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include'
+  });
+  return response;
+}
+
+// logout (no data in the post)
+export async function logout() {
+  const response = await fetch(`${API_URL}/auth/logout`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include'
+  });
+  return await response.json();
+}
+

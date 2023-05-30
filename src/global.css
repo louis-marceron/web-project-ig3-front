@@ -1,25 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
 
 /* COLORS */
 :root {
   --color-primary: #282828;
-  --color-secondary: #2e2e2e;
+  --color-secondary: #5E5E5E;
 }
 
 body {
   display: flex;
   flex-direction: column-reverse;
   min-height: 100svh;
-  font-family: "Quicksand", sans-serif;
+  font-family: "DM Sans", sans-serif;
   color: var(--color-primary);
-  margin: 1rem;
 }
 
 main {
-  /* height: 100svh; */
-  /* Fallback for browsers that do not support svh */
-  /* height: 100vh;  */
+  display: flex;
   flex-grow: 1;
+  margin: 1rem;
 }
 
 /* TEXT */
@@ -30,12 +28,13 @@ h1 {
 }
 
 h2 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
+  margin-bottom: 0.3rem;
 }
 
 p {
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.2;
 }
 

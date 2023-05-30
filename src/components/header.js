@@ -3,8 +3,8 @@ export default {
     return `
         <nav>
           <a href="/repas" class="internal-link">Repas</a>
-          <a href="/statistiques" class="internal-link">Statistiques</a>
-          <a href="/compte" class="internal-link">Compte</a>
+          <a href="/statistiques" class="internal-link">Stats</a>
+          <a href="/compte" class="internal-link">Profil</a>
         </nav>
       `;
   },
