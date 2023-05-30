@@ -1,4 +1,4 @@
-const API_URL = 'http://ecodiet.cluster-ig3.igpolytech.fr';
+const API_URL = 'https://ecodiet.cluster-ig3.igpolytech.fr';
 // const API_URL = 'http://localhost:3000'
 
 export async function getAllUsers() {
