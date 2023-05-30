@@ -7,10 +7,10 @@
 
 #account-settings button {
   padding: 1rem;
-  background-color: rgb(255, 148, 148);
   width: 100%;
   text-align: center;
   border-radius: 12px;
+  cursor: pointer;
 }
 
 #logout {

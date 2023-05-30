@@ -8,7 +8,6 @@ const publicPath = path.join(__dirname, '/'); // serves from the root folder
 app.use(express.static(publicPath));
 
 app.get('*', (req, res) => {
-    console.log('test');
     res.sendFile(path.join(publicPath, 'index.html'));
 });
 

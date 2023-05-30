@@ -14,25 +14,28 @@ export default {
 
         let emailLabel = document.createElement('label');
         emailLabel.setAttribute('for', 'email');
-        emailLabel.innerText = "Email:";
+        emailLabel.innerText = "Adresse email";
         let emailInput = document.createElement('input');
         emailInput.setAttribute('type', 'email');
         emailInput.setAttribute('id', 'email');
         emailInput.setAttribute('name', 'email');
         emailInput.required = true;
+        emailInput.classList.add('input-field');
 
         let passwordLabel = document.createElement('label');
         passwordLabel.setAttribute('for', 'password');
-        passwordLabel.innerText = "Password:";
+        passwordLabel.innerText = "Mot de passe";
         let passwordInput = document.createElement('input');
         passwordInput.setAttribute('type', 'password');
         passwordInput.setAttribute('id', 'password');
         passwordInput.setAttribute('name', 'password');
         passwordInput.required = true;
+        passwordInput.classList.add('input-field');
 
         let submitInput = document.createElement('input');
         submitInput.setAttribute('type', 'submit');
         submitInput.setAttribute('value', 'Register');
+        submitInput.classList.add('submit-button');
 
         form.appendChild(emailLabel);
         form.appendChild(document.createElement('br')); 

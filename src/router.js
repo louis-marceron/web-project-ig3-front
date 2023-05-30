@@ -33,7 +33,6 @@ const handleInternalLinks = (router) => {
             event.preventDefault()
             // Change the URL to the href attribute of our link
             window.history.pushState({}, "", event.target.href)
-            console.log('Internal link clicked')
             // Load the page using the new URL
             router.loadRoute(event.target.pathname)
         }

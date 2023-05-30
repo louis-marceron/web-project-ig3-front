@@ -19,27 +19,30 @@ export default {
         // Create email label and input field
         let emailLabel = document.createElement('label');
         emailLabel.setAttribute('for', 'email');
-        emailLabel.innerText = "Email:";
+        emailLabel.innerText = "Adresse email";
         let emailInput = document.createElement('input');
         emailInput.setAttribute('type', 'email');
         emailInput.setAttribute('id', 'email');
         emailInput.setAttribute('name', 'email');
         emailInput.required = true;
+        emailInput.classList.add('input-field');
 
         // Create password label and input field
         let passwordLabel = document.createElement('label');
         passwordLabel.setAttribute('for', 'password');
-        passwordLabel.innerText = "Password:";
+        passwordLabel.innerText = "Mot de passe";
         let passwordInput = document.createElement('input');
         passwordInput.setAttribute('type', 'password');
         passwordInput.setAttribute('id', 'password');
         passwordInput.setAttribute('name', 'password');
         passwordInput.required = true;
+        passwordInput.classList.add('input-field');
 
         // Create submit button
         let submitInput = document.createElement('input');
         submitInput.setAttribute('type', 'submit');
         submitInput.setAttribute('value', 'Login');
+        submitInput.classList.add('submit-button');
 
         // Append label and input fields to form
         form.appendChild(emailLabel);
@@ -79,7 +82,6 @@ export default {
             const password = document.getElementById("password").value;
 
             const response = await login(email, password);
-            console.log(response);
 
             // Display a message depending on whether or not the login was successful
             const messageElement = document.getElementById("message");
