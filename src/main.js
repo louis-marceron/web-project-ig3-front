@@ -26,6 +26,7 @@ if (isLoggedIn) {
     }
     // Render header
     document.querySelector('header').innerHTML = await headerComponent.render()
+    await headerComponent.afterRender()
 }
 
 else {

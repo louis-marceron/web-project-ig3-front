@@ -6,8 +6,8 @@ export default {
         return `
             <section id="account-settings">
                 <h1>Paramètres du compte</h1>
-                <button id="delete-account">Supprimer le compte</button>
                 <button id="logout">Se déconnecter</button>
+                <button id="delete-account">Supprimer le compte</button>
             </section>
         `
     },
@@ -18,7 +18,7 @@ export default {
             const confirmation = confirm("Êtes-vous sûr de vouloir supprimer votre compte? Cette action ne peut pas être annulée.");
             if (confirmation) {
                 const response = await deleteAccount(getCookie('userId'));
- 
+
                 if (response.status !== 204) {
                     alert("Une erreur s'est produite lors de la suppression du compte");
                 } else {

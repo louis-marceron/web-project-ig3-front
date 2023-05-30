@@ -5,9 +5,16 @@ export default {
     render: async () => {
         return `
             <section id="stats">
-                <h1>Statistiques</h1>
-                <div id="week-average"></div>
-                <div id="month-average"></div>
+                <h1>7 derniers jours</h1>
+                <h2 id="week-total-title">Total :</h2>
+                <div id="week-total"></div>
+                <h2 id="week-histogram-title">Plats consommés</h2>
+                <div id="week-histogram"></div>
+                <h1>30 derniers jours</h1>
+                <h2 id="week-total-title">Total :</h2>
+                <div id="month-total"></div>
+                <h2 id="week-histogram-title">Plats consommés</h2>
+                <div id="month-histogram"></div>
             </section>
         `
     },
@@ -46,7 +53,38 @@ export default {
         const weekAverage = weekCarbonFootprint / weekConsumptions.length;
         const monthAverage = monthCarbonFootprint / monthConsumptions.length;
 
-        document.getElementById('week-average').textContent = `Moyenne de l'empreinte carbone de la semaine dernière : ${weekAverage.toFixed(2)}`;
-        document.getElementById('month-average').textContent = `Moyenne de l'empreinte carbone du mois dernier : ${monthAverage.toFixed(2)}`;
+        document.getElementById('week-total').textContent = `${weekCarbonFootprint.toFixed(2)}g CO2e émis`;
+        document.getElementById('month-total').textContent = `${monthCarbonFootprint.toFixed(2)}g CO2e émis`;
+        
+        const weekHistogram = getMealHistogram(weekConsumptions, meals);
+        const monthHistogram = getMealHistogram(monthConsumptions, meals);
+
+        let weekHistogramText = '';
+        for (let mealName in weekHistogram) {
+            weekHistogramText += `${mealName}: ${weekHistogram[mealName]}<br>`;
+        }
+
+        let monthHistogramText = '';
+        for (let mealName in monthHistogram) {
+            monthHistogramText += `${mealName}: ${monthHistogram[mealName]}<br>`;
+        }
+
+        document.getElementById('week-histogram').innerHTML = weekHistogramText;
+        document.getElementById('month-histogram').innerHTML = monthHistogramText;
     }
+}
+
+const getMealHistogram = (consumptions, meals) => {
+    const histogram = {};
+
+    for (let consumption of consumptions) {
+        const meal = meals.find(meal => meal.meal_id === consumption.meal_id);
+        if (histogram[meal.name]) {
+            histogram[meal.name]++;
+        } else {
+            histogram[meal.name] = 1;
+        }
+    }
+
+    return histogram;
 }
