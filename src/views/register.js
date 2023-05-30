@@ -1,22 +1,17 @@
-import { login } from '../services/apiService.js';
-import getCookie from '../utils/getCookie.js';
+import { register } from '../services/apiService.js';
 
 export default {
     render: async () => {
-        // Create a form-container div
         let formContainer = document.createElement('div');
         formContainer.setAttribute('id', 'form-container');
 
-        // Add a title
         let title = document.createElement('h1');
-        title.innerText = "Connexion";
+        title.innerText = "Inscription";
         formContainer.appendChild(title);
 
-        // Create form element
         let form = document.createElement('form');
-        form.setAttribute('id', 'loginForm');
+        form.setAttribute('id', 'registerForm');
 
-        // Create email label and input field
         let emailLabel = document.createElement('label');
         emailLabel.setAttribute('for', 'email');
         emailLabel.innerText = "Email:";
@@ -26,7 +21,6 @@ export default {
         emailInput.setAttribute('name', 'email');
         emailInput.required = true;
 
-        // Create password label and input field
         let passwordLabel = document.createElement('label');
         passwordLabel.setAttribute('for', 'password');
         passwordLabel.innerText = "Password:";
@@ -36,64 +30,54 @@ export default {
         passwordInput.setAttribute('name', 'password');
         passwordInput.required = true;
 
-        // Create submit button
         let submitInput = document.createElement('input');
         submitInput.setAttribute('type', 'submit');
-        submitInput.setAttribute('value', 'Login');
+        submitInput.setAttribute('value', 'Register');
 
-        // Append label and input fields to form
         form.appendChild(emailLabel);
-        form.appendChild(document.createElement('br')); // Create a line break
+        form.appendChild(document.createElement('br')); 
         form.appendChild(emailInput);
-        form.appendChild(document.createElement('br')); // Create a line break
+        form.appendChild(document.createElement('br')); 
         form.appendChild(passwordLabel);
-        form.appendChild(document.createElement('br')); // Create a line break
+        form.appendChild(document.createElement('br')); 
         form.appendChild(passwordInput);
-        form.appendChild(document.createElement('br')); // Create a line break
+        form.appendChild(document.createElement('br')); 
         form.appendChild(submitInput);
 
-        // Create message div
         let messageDiv = document.createElement('div');
         messageDiv.setAttribute('id', 'message');
 
-        // Create a link to the register page
-        let registerLink = document.createElement('a');
-        registerLink.setAttribute('href', '/inscription');
-        registerLink.innerText = "Pas encore inscrit ? Cliquez ici pour vous inscrire !";
-        registerLink.classList.add('internal-link');
+        let loginLink = document.createElement('a');
+        loginLink.setAttribute('href', '/connexion');
+        loginLink.innerText = "Déjà inscrit ? Cliquez ici pour vous connecter !";
+        loginLink.classList.add('internal-link');
 
-        // Append form and message div to form-container
         formContainer.appendChild(form);
         formContainer.appendChild(messageDiv);
-        formContainer.appendChild(registerLink);
+        formContainer.appendChild(loginLink);
 
         return formContainer.outerHTML;
     },
 
     afterRender: async () => {
-        // Handle form submission
-        document.getElementById('loginForm').addEventListener("submit", async (event) => {
-            event.preventDefault(); // prevent the form from submitting normally
+        document.getElementById('registerForm').addEventListener("submit", async (event) => {
+            event.preventDefault();
 
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
 
-            const response = await login(email, password);
+            const response = await register(email, password);
             console.log(response);
 
-            // Display a message depending on whether or not the login was successful
             const messageElement = document.getElementById("message");
-            console.log(response);
             if (response.error === 'Validation error') {
                 messageElement.textContent = 'Le mot de passe doit faire au moins 8 caractères.';
             }
-            else if (response.error === 'Invalid credentials') {
-                messageElement.textContent = 'Identifiants incorrects, veuillez réessayer.';
+            else if (response.error === 'An account with this email already exists') {
+                messageElement.textContent = 'Cet email est déjà enregistré, veuillez essayer un autre.';
             }
             else {
-                messageElement.textContent = 'Connexion réussie.';
-                window.loggedIn = getCookie('loggedIn');
-                // Redirect to home page
+                messageElement.textContent = 'Inscription réussite.';
                 window.location.href = '/';
             }
         });

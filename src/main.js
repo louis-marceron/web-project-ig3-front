@@ -3,25 +3,25 @@ import getCookie from './utils/getCookie.js'
 
 import headerComponent from './components/header.js'
 
-import homeView from './views/home.js'
-import userManagementView from './views/userManagement.js'
 import notFoundView from "./views/notFound.js"
 import mealsView from "./views/meals.js"
 import loginView from "./views/login.js"
+import registerView from "./views/register.js"
+import accountSettingsView from "./views/accountSettings.js"
+import statsView from "./views/stats.js"
 
 const isLoggedIn = getCookie('loggedIn')
 
 let routerOptions
 
 if (isLoggedIn) {
-    console.log('Logged in')
     routerOptions = {
         notFound: notFoundView,
         routes: {
-            '/': homeView,
+            '/': mealsView,
             '/repas': mealsView,
-            '/statistiques': loginView,
-            '/compte': userManagementView,
+            '/statistiques': statsView,
+            '/compte': accountSettingsView,
         },
     }
     // Render header
@@ -29,11 +29,12 @@ if (isLoggedIn) {
 }
 
 else {
-    console.log('Not logged in')
     routerOptions = {
         notFound: loginView,
         routes: {
             '/': loginView,
+            '/connexion': loginView,
+            '/inscription': registerView,
         }
     }
 }
