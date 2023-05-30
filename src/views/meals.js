@@ -7,5 +7,8 @@ export default {
             <div id="meals-list">${await mealsList.render()}</div>
             </section>
         `
+    },
+    afterRender: async () => {
+        await mealsList.afterRender()
     }
 }

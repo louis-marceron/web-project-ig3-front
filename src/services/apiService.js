@@ -34,3 +34,15 @@ export async function register(email, password) {
   });
   return await response.json();
 }
+
+export async function consumeMeal(mealId, userId) {
+  const response = await fetch(`${API_URL}/users/${userId}/meal-consumptions`, {
+    method: 'POST',
+    body: JSON.stringify({ meal_id: mealId }),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include'
+  });
+  return await response.json();
+}
