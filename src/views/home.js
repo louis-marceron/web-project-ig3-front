@@ -4,6 +4,6 @@ export default {
             <section class="section">
                 <h1> Welcome to EcoDiet! </h1>
             </section>
-        `
+        `   
     }
 }

@@ -3,8 +3,7 @@ class Router {
         this.notFound = routes.notFound
         this.routes = routes.routes
         // When the page loads for the first time,
-        // Netifly will redirect to index.html, but won't change the URL.
-        // So this will load the route of the current URL.
+        // this will load the route of the current URL.
         this.loadRoute(window.location.pathname)
     }
 
@@ -13,6 +12,9 @@ class Router {
         const view = this.routes[pathName] || this.notFound
         // history.pushState({}, '', pathName)
         main.innerHTML = await view.render()
+        if (view && typeof view.afterRender === 'function') {
+            await view.afterRender();
+        }
     }
 }
 

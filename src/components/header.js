@@ -1,10 +1,11 @@
 export default {
-    render: async () => {
-        return `
+  render: async () => {
+    return `
         <nav>
-          <a href="/src/index.html" class="internal-link">Home</a>
-          <a href="/src/users" class="internal-link">Manage Users</a>
+          <a href="/repas" class="internal-link">Repas</a>
+          <a href="/statistiques" class="internal-link">Statistiques</a>
+          <a href="/compte" class="internal-link">Compte</a>
         </nav>
       `;
-    },
+  },
 };
