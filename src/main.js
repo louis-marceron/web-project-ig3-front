@@ -20,8 +20,8 @@ if (isLoggedIn) {
         routes: {
             '/': homeView,
             '/repas': mealsView,
-            '/users': userManagementView,
-            '/connexion': loginView,
+            '/statistiques': loginView,
+            '/compte': userManagementView,
         },
     }
     // Render header
