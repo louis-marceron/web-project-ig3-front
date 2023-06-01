@@ -96,7 +96,7 @@ export default {
                 messageElement.textContent = 'Connexion réussie.';
                 window.loggedIn = getCookie('loggedIn');
                 // Redirect to home page
-                window.location.href = '/';
+                // window.location.href = '/';
             }
         });
     }
