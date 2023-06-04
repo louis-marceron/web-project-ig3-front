@@ -1,5 +1,5 @@
 import { getMealConsumptions, getAllMeals } from '../services/apiService.js'
-import getCookie from '../utils/getCookie.js';
+import deleteLocalStorage from '../utils/deleteLocalStorage.js'
 
 export default {
     render: async () => {
@@ -20,9 +20,16 @@ export default {
     },
 
     afterRender: async () => {
+        let mealConsumptions
+        let meals
 
-        const mealConsumptions = await getMealConsumptions(getCookie('userId'));
-        const meals = await getAllMeals();
+        try {
+            mealConsumptions = await getMealConsumptions(localStorage.getItem('userId'));
+            meals = await getAllMeals();
+        } catch (error) {
+            deleteLocalStorage();
+            window.location.href = '/';
+        }
 
         console.log(mealConsumptions);
 
@@ -55,7 +62,7 @@ export default {
 
         document.getElementById('week-total').textContent = `${weekCarbonFootprint.toFixed(2)}g CO2e émis`;
         document.getElementById('month-total').textContent = `${monthCarbonFootprint.toFixed(2)}g CO2e émis`;
-        
+
         const weekHistogram = getMealHistogram(weekConsumptions, meals);
         const monthHistogram = getMealHistogram(monthConsumptions, meals);
 

@@ -20,6 +20,7 @@
     cursor: text;
     padding: 1rem;
     width: 100%;
+    max-width: 1500px;
     border-radius: 12px;
     background-color: #f3f3f3;
     border-color: gray;

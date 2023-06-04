@@ -1,5 +1,5 @@
 import { deleteAccount, logout } from '../services/apiService.js'
-import getCookie from '../utils/getCookie.js';
+import deleteLocalStorage from '../utils/deleteLocalStorage.js';
 
 export default {
     render: async () => {
@@ -17,11 +17,12 @@ export default {
         document.getElementById('delete-account').addEventListener('click', async () => {
             const confirmation = confirm("Êtes-vous sûr de vouloir supprimer votre compte? Cette action ne peut pas être annulée.");
             if (confirmation) {
-                const response = await deleteAccount(getCookie('userId'));
+                const response = await deleteAccount(localStorage.getItem('userId'));
 
                 if (response.status !== 204) {
                     alert("Une erreur s'est produite lors de la suppression du compte");
                 } else {
+                    deleteLocalStorage();
                     window.location.href = '/';
                 }
             }
@@ -33,6 +34,7 @@ export default {
             if (response.error) {
                 alert("Une erreur s'est produite lors de la déconnexion");
             } else {
+                deleteLocalStorage();
                 window.location.href = '/';
             }
         });

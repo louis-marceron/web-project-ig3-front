@@ -14,10 +14,22 @@ body {
   color: var(--color-primary);
 }
 
+@media (min-width: 55rem) {
+  body {
+    flex-direction: column;
+  }
+}
+
 main {
   display: flex;
   flex-grow: 1;
   margin: 1rem;
+  justify-content: center;
+}
+
+main > section {
+  width: 100%;
+  max-width: 40rem;
 }
 
 /* TEXT */

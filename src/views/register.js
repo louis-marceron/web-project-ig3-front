@@ -2,7 +2,7 @@ import { register } from '../services/apiService.js';
 
 export default {
     render: async () => {
-        let formContainer = document.createElement('div');
+        let formContainer = document.createElement('section');
         formContainer.setAttribute('id', 'form-container');
 
         let title = document.createElement('h1');
@@ -34,17 +34,17 @@ export default {
 
         let submitInput = document.createElement('input');
         submitInput.setAttribute('type', 'submit');
-        submitInput.setAttribute('value', 'Register');
+        submitInput.setAttribute('value', 'S\'inscrire');
         submitInput.classList.add('submit-button');
 
         form.appendChild(emailLabel);
-        form.appendChild(document.createElement('br')); 
+        form.appendChild(document.createElement('br'));
         form.appendChild(emailInput);
-        form.appendChild(document.createElement('br')); 
+        form.appendChild(document.createElement('br'));
         form.appendChild(passwordLabel);
-        form.appendChild(document.createElement('br')); 
+        form.appendChild(document.createElement('br'));
         form.appendChild(passwordInput);
-        form.appendChild(document.createElement('br')); 
+        form.appendChild(document.createElement('br'));
         form.appendChild(submitInput);
 
         let messageDiv = document.createElement('div');
@@ -81,6 +81,8 @@ export default {
             }
             else {
                 messageElement.textContent = 'Inscription réussite.';
+                localStorage.setItem('userId', response.userId);
+                localStorage.setItem('isLoggedIn', true);
                 window.location.href = '/';
             }
         });

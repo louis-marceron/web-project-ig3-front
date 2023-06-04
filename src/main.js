@@ -1,5 +1,4 @@
 import { Router, handleInternalLinks } from './router.js'
-import getCookie from './utils/getCookie.js'
 
 import headerComponent from './components/header.js'
 
@@ -10,7 +9,7 @@ import registerView from "./views/register.js"
 import accountSettingsView from "./views/accountSettings.js"
 import statsView from "./views/stats.js"
 
-const isLoggedIn = getCookie('loggedIn') == 'true'
+const isLoggedIn = localStorage.getItem('isLoggedIn')
 
 let routerOptions
 

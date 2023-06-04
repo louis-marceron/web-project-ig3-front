@@ -1,11 +1,16 @@
 import { getAllMeals, consumeMeal } from '../services/apiService.js'
-import getCookie from '../utils/getCookie.js'
+import deleteLocalStorage from '../utils/deleteLocalStorage.js'
 
 export default {
     render: async () => {
+        try {
         const meals = await getAllMeals()
         const mealsList = meals.map(meal => createMeal(meal)).join('\n')
         return mealsList
+        } catch (error) {
+            deleteLocalStorage();
+            window.location.href = '/';
+        }
     },
 
     afterRender: async () => {
@@ -21,7 +26,7 @@ export default {
             confirmButton.addEventListener('click', async (e) => {
                 e.stopPropagation(); // prevent the click from bubbling up to the .meal element
                 const mealId = mealElement.getAttribute('data-meal-id');
-                const response = await consumeMeal(mealId, getCookie('userId'));
+                const response = await consumeMeal(mealId, localStorage.getItem('userId'));
                 if (response.error) {
                     alert(response.error);
                 } else {

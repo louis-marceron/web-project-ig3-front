@@ -1,10 +1,9 @@
 import { login } from '../services/apiService.js';
-import getCookie from '../utils/getCookie.js';
 
 export default {
     render: async () => {
         // Create a form-container div
-        let formContainer = document.createElement('div');
+        let formContainer = document.createElement('section');
         formContainer.setAttribute('id', 'form-container');
 
         // Add a title
@@ -41,7 +40,7 @@ export default {
         // Create submit button
         let submitInput = document.createElement('input');
         submitInput.setAttribute('type', 'submit');
-        submitInput.setAttribute('value', 'Login');
+        submitInput.setAttribute('value', 'Se connecter');
         submitInput.classList.add('submit-button');
 
         // Append label and input fields to form
@@ -85,7 +84,6 @@ export default {
 
             // Display a message depending on whether or not the login was successful
             const messageElement = document.getElementById("message");
-            console.log(response);
             if (response.error === 'Validation error') {
                 messageElement.textContent = 'Le mot de passe doit faire au moins 8 caractères.';
             }
@@ -94,9 +92,10 @@ export default {
             }
             else {
                 messageElement.textContent = 'Connexion réussie.';
-                window.loggedIn = getCookie('loggedIn');
+                localStorage.setItem('userId', response.userId);
+                localStorage.setItem('isLoggedIn', true);
                 // Redirect to home page
-                // window.location.href = '/';
+                window.location.href = '/';
             }
         });
     }
