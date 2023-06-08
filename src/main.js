@@ -9,6 +9,15 @@ import registerView from "./views/register.js"
 import accountSettingsView from "./views/accountSettings.js"
 import statsView from "./views/stats.js"
 
+// Load styles
+import './reset.css'
+import './global.css'
+import './components/mealList.css'
+import './views/form.css'
+import './components/header.css'
+import './views/accountSettings.css'
+import './views/form.css'
+
 const isLoggedIn = localStorage.getItem('isLoggedIn')
 
 let routerOptions
